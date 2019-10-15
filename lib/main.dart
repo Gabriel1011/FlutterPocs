@@ -13,8 +13,40 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Lista básica"),
         ),
-        body: buildListView(),
+        body: buildListViewDinamicoHorizontal(),
       ),
+    );
+  }
+
+  buildListViewDinamico() {
+    final itens = List<String>.generate(10000, (i) => "item $i");
+    
+    return ListView.builder(
+      itemCount: itens.length,
+      itemBuilder: (context,index){
+        return ListTile(
+          title: Text('${itens[index]}'),
+          onTap: (){
+            print("press!!");
+          },
+        );
+      },     
+    );
+  } 
+
+  buildListViewDinamicoHorizontal() {
+    final itens = List<String>.generate(10000, (i) => "item $i");
+    
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: itens.length,
+      itemBuilder: (context,index){
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 1.0),
+          color: Colors.orangeAccent,
+          child: Text('$index'),
+        );
+      },     
     );
   } 
 }
